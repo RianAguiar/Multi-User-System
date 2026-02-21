@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import documento
 
-# Register your models here.
+@admin.register(documento)
+class documentoAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'aluno', 'status')
+    list_filter = ('status',)
