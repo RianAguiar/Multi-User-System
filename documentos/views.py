@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import DocumentoForm
 
-# Create your views here.
+def EnviarDocumento(request):
+    if request.method == 'POST':
+        form = DocumentoForm(request.POST, request.FILES)
+        if form.is_valid():
+            doc = form.save(commit=False)
+            doc.aluno = request.user
+            doc.save()
+            return redirect('enviar_documento')
+    else:
+        form = DocumentoForm()
+    return render(request,'documento/enviar.html', {'form':form})
