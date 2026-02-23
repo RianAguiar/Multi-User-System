@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import DocumentoForm
-from .models import documento
+from .models import Documento
 
 def EnviarDocumento(request):
     if request.method == 'POST':
@@ -17,5 +17,5 @@ def EnviarDocumento(request):
 
 
 def ListaDocumentos(request):
-    docs = documento.objects.select_related('aluno').all()
+    docs = Documento.objects.select_related('aluno').all()
     return render(request, 'professor/lista.html', {'docs': docs})
