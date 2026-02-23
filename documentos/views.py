@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from .forms import DocumentoForm
+from .models import documento
 
 def EnviarDocumento(request):
     if request.method == 'POST':
@@ -12,4 +12,10 @@ def EnviarDocumento(request):
             return redirect('enviar_documento')
     else:
         form = DocumentoForm()
-    return render(request,'documento/enviar.html', {'form':form})
+    return render(request,'aluno/enviar.html', {'form':form})
+
+
+
+def ListaDocumentos(request):
+    docs = documento.objects.select_related('aluno').all()
+    return render(request, 'professor/lista.html', {'docs': docs})
