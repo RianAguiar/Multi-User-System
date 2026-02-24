@@ -11,7 +11,7 @@ def EnviarDocumento(request):
             doc = form.save(commit=False)
             doc.aluno = request.user
             doc.save()
-            return redirect('enviar_documento')
+            return redirect('documentos:enviar')
     else:
         form = DocumentoForm()
     return render(request,'aluno/enviar.html', { 'form':form })
