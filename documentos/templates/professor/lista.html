@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>PROFESSOR receba o formulario dos alunos</h1>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Sair</button>
+    </form>
     {% for doc in docs %}
-    <p>{{ doc.titulo }} - {{ doc.aluno }} - <img src="{{ doc.arquivo.url }}" width="50"> </p>
+      <p>
+        {{ doc.titulo }} - {{ doc.aluno }} - <img src="{{ doc.arquivo.url }}" width="50" />
+      </p>
     {% empty %}
-    <p>Nenhum documento encontrado</p>
+      <p>Nenhum documento encontrado</p>
     {% endfor %}
-</body>
-
+  </body>
 </html>

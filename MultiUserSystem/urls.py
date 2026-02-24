@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
+from django.contrib.auth.views import LogoutView
 
 def index(request):
     return render(request, 'index.html')
@@ -28,4 +29,5 @@ urlpatterns = [
     path('documentos/', include('documentos.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', index, name='index'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
